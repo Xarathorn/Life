@@ -57,16 +57,39 @@ public class Board {
 	public int getCols() {
 		return c;
 	}
+	
+	/**
+	 * Returns an ArrayList of living cells
+	 * @return
+	 */
+	public ArrayList<Point> getIndices() {
+		return idc;
+	}
+	
+	/**
+	 * Returns the number of living cells
+	 * @return
+	 */
+	public int getLiveCells() {
+		return idc.size();
+	}
+
+	/**
+	 * Returns if cell at (row, col) is alive
+	 * @param row
+	 * @param col
+	 * @return
+	 */
 	public boolean getIndice(int row, int col) {
 		Point p = new Point(row, col);
 		return getIndice(p);
 	}
-	public ArrayList<Point> getIndices() {
-		return idc;
-	}
-	public int getLiveCells() {
-		return idc.size();
-	}
+	
+	/**
+	 * Returns if cell at (row, col) is alive
+	 * @param p
+	 * @return
+	 */
 	public boolean getIndice(Point p) {
 		if (p.getX() >= r || p.getY() >= c)
 			throw new ArrayIndexOutOfBoundsException();
@@ -118,12 +141,21 @@ public class Board {
 		idc = new ArrayList<Point>();
 	}
 
+	/**
+	 * Resets board to size rows x cols
+	 * @param rows
+	 * @param cols
+	 */
 	public void resetBoard(int rows, int cols) {
 		idc = new ArrayList<Point>();
 		r = rows;
 		c = cols;
 	}
 	
+	/**
+	 * Resets board to size p.getX() x p.getY()
+	 * @param p
+	 */
 	public void resetBoard(Point p) {
 		resetBoard((int)p.getX(),(int)p.getY());
 	}
@@ -154,7 +186,11 @@ public class Board {
 		return out;
 	}
 	
-	
+	/**
+	 * Resizes board to rows x cols
+	 * @param rows
+	 * @param cols
+	 */
 	public void resize(int rows, int cols) {
 		r = rows;
 		c = cols;

@@ -21,8 +21,7 @@ import javax.swing.Timer;
  * 
  * @author William
  */
-// TODO only redraw cells that have changed, beautify code, add fullscreen w/
-// escape to exit
+// TODO only redraw cells that have changed, beautify code, add fullscreen w/ escape to exit
 class BoardPanel extends JPanel implements ActionListener, ComponentListener {
 	private static final long serialVersionUID = 1L;
 
@@ -136,10 +135,20 @@ class BoardPanel extends JPanel implements ActionListener, ComponentListener {
 		return new Color(red, grn, blu);
 	}
 
+	/**
+	 * Constrains to the color range
+	 * @param value
+	 * @return
+	 */
 	private int colorRange(int value) {
 		return range(0, 255, value);
 	}
 
+	/**
+	 * Is color dark?
+	 * @param color
+	 * @return
+	 */
 	private boolean dark(Color color) {
 		return !(color.getRed() > 128 || color.getGreen() > 128 || color.getBlue() > 128);
 	}
@@ -185,7 +194,9 @@ class BoardPanel extends JPanel implements ActionListener, ComponentListener {
 		timer.start();
 	}
 
-	/** Whenever timer updates */
+	/**
+	 * Whenever timer updates
+	 */
 	public void actionPerformed(ActionEvent arg0) {
 		if (cycle) {
 			cycleRainbow();
@@ -359,6 +370,11 @@ class BoardPanel extends JPanel implements ActionListener, ComponentListener {
 		return Math.min(Math.max(value, min), max);
 	}
 
+	/**
+	 * Resets the size spinners to new rows and columns
+	 * @param rows
+	 * @param cols
+	 */
 	private void modifySizeSpinners(int rows, int cols) {
 		h = this.getHeight();
 		w = this.getWidth();

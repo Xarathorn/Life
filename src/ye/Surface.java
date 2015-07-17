@@ -33,23 +33,20 @@ public class Surface extends JPanel implements ActionListener, ItemListener {
 	public JLabel lblGen, lblCells;
 	public JSpinner spinnerRow, spinnerCol;
 
-	private JSlider sliderR, sliderG, sliderB, sliderSpeed;
+	private JSlider sliderR, sliderG, sliderB, sliderSpeed, sliderRain;
 	private JSpinner spinnerR, spinnerG, spinnerB;
 	private JToggleButton rainbowButton, pauseButton;
 	private JButton btnOpen, btnSave, btnClear, btnGlider, btnBlock, btnExploder, btnGun, btnBloop, btnLShip, btnTmblr;
-	private JCheckBox wrapBox, darkBox;
+	private JCheckBox wrapBox, darkBox, persistBox;
 	private JFileChooser jfc;
 	private int DELAY = 75;
 	private BoardPanel panel;
 	private JMenu mnPrefabs;
 	private String path;
-	private JCheckBox persistBox;
-	private Box rainBox;
-	private JSlider sliderRain;
-	private Box horizontalBox;
+	private Box rainBox, horizontalBox;
 	private Component horizontalStrut;
 
-	public Surface() { // TODO make ghosts of droppable items
+	public Surface() {
 		r = 25;
 		c = 50;
 		path = Surface.class.getProtectionDomain().getCodeSource().getLocation().getPath().substring(1).replace("/", "\\")+"Boards\\";
@@ -286,8 +283,7 @@ public class Surface extends JPanel implements ActionListener, ItemListener {
 	/**
 	 * Updates red, green, blue, sliders, and spinners
 	 * 
-	 * @param c
-	 *            - color method updates to
+	 * @param c - color method updates to
 	 */
 	public void updateColor(Color c) {
 		red = c.getRed();
@@ -303,7 +299,7 @@ public class Surface extends JPanel implements ActionListener, ItemListener {
 	/**
 	 * Sets up slider
 	 * 
-	 * @param slider to be set
+	 * @param slider - slider to be set
 	 * @param tipText - ToolTipText
 	 */
 	private void setRGBSlider(JSlider slider, String tipText) {
@@ -376,9 +372,8 @@ public class Surface extends JPanel implements ActionListener, ItemListener {
 			} else if (slider == sliderSpeed) { // Speed slider
 				DELAY = slider.getValue();
 				panel.setTimerDelay(DELAY);
-			} else if (slider == sliderRain) {
+			} else if (slider == sliderRain)
 				panel.setCycleSpeed(sliderRain.getValue());
-			}
 			panel.setColor(new Color(red, green, blue));
 		}
 	}
@@ -434,7 +429,6 @@ public class Surface extends JPanel implements ActionListener, ItemListener {
 	/**
 	 * Toggle button handling
 	 */
-	@Override
 	public void itemStateChanged(ItemEvent e) {
 		if (e.getSource() == pauseButton) // Pause button
 			if (e.getStateChange() == ItemEvent.SELECTED)
